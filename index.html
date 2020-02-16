@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      table{
+        border-collapse: collapse;
+      }
+      table tr td{
+        width: 2em;
+        height: 2em;
+        border: 1px solid #666666;
+        text-align: center;
+      }
+      decrypt-widget{
+        display: block;
+        border: 1px solid #666666;
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="add-widget">+ Nouveau décryptage</button>
+    <div id="app-container"></div>
+
+    <script type="module" src="decrypt-widget.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
