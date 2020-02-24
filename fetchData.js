@@ -1,5 +1,5 @@
 export default async function fetchData(dataset, field, filters = []){
-  return fetch(dataset + '.json').then(res => res.json().then(json => {
+  return fetch(dataset + '.json', {cache: "no-cache"}).then(res => res.json().then(json => {
     let data = field.split('.').reduce((carry, f) => carry[f], json);
     if (filters.includes('nospace') || filters.includes('letters')){
       data = data.replace(/\s/g, '');

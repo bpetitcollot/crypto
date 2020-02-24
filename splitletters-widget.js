@@ -1,6 +1,6 @@
 import fetchData from './fetchData.js';
 
-class SplitWidget extends HTMLElement {
+class SplitLettersWidget extends HTMLElement {
 
   constructor() {
     super();
@@ -44,6 +44,6 @@ class SplitWidget extends HTMLElement {
   }
 }
 
-customElements.define('split-widget', SplitWidget);
+customElements.define('splitletters-widget', SplitLettersWidget);
 
-export default SplitWidget;
+export default SplitLettersWidget;

@@ -1,5 +1,8 @@
-import SplitWidget from './split-widget.js';
+import SplitLettersWidget from './splitletters-widget.js';
+import SplitWordsWidget from './splitwords-widget.js';
 import ReverseWidget from './reverse-widget.js';
+import CountLettersWidget from './countletters-widget.js';
+import CountWordssWidget from './countwords-widget.js';
 
 export default {
   datasets: [
@@ -7,7 +10,10 @@ export default {
     'chouette'
   ],
   decrypt: {
-    'split-widget': "Lignes à nombre de caractères fixe",
-    'reverse-widget': "Comparer à l'endroit / à l'envers"
+    'splitletters-widget': "Lignes à nombre de caractères fixe",
+    'splitwords-widget': "Lignes à nombre de mots fixe",
+    'reverse-widget': "Comparer à l'endroit / à l'envers",
+    'countletters-widget': "Compter les lettres",
+    'countwords-widget': "Compter les mots"
   }
 };

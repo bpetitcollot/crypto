@@ -19,7 +19,8 @@ class DecryptWidget extends HTMLElement {
         ${config.datasets.map(d => `<option>${d}</option>`)}
       </select>
       <div class="field" style="display: inline;"></div>
-      <label><input class="filter-letters" type="checkbox"> Lettres seulement</label>
+      <label><input class="filter-nopunctuation" type="checkbox"> Sans ponctuation</label>
+      <label><input class="filter-nospace" type="checkbox"> Sans espaces</label>
       <div class="raw-data"></div>
       <select class="decrypt-algo hidden">
       <option value="" disabled selected>- algorithme -</option>
@@ -30,7 +31,7 @@ class DecryptWidget extends HTMLElement {
 
     this.querySelector('.dataset').addEventListener('change', async () => {
       this.querySelector('.raw-data').innerHTML = '';
-      this.dataSet = await fetch(this.querySelector('.dataset').value + '.json').then(res => res.json());
+      this.dataSet = await fetch(this.querySelector('.dataset').value + '.json', {cache: 'no-cache'}).then(res => res.json());
       this.field = null;
       if (typeof this.dataSet === 'object'){
         this.querySelector('.field').innerHTML = `
@@ -71,11 +72,19 @@ class DecryptWidget extends HTMLElement {
       this.renderResult();
     });
 
-    this.querySelector('.filter-letters').addEventListener('change', e => {
+    this.querySelector('.filter-nopunctuation').addEventListener('change', e => {
       if (e.target.checked){
-        this.filters = ['letters'];
+        this.filters.push('nopunctuation');
       } else {
-        this.filters = [];
+        this.filters = this.filters.filter(f => f !== 'nopunctuation');
+      }
+      this.renderResult();
+    });
+    this.querySelector('.filter-nospace').addEventListener('change', e => {
+      if (e.target.checked){
+        this.filters.push('nospace');
+      } else {
+        this.filters = this.filters.filter(f => f !== 'nospace');
       }
       this.renderResult();
     });
