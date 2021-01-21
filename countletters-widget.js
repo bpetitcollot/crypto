@@ -33,14 +33,23 @@ class CountLettersWidget extends HTMLElement {
       fetchData(this.dataset.dataset, this.dataset.field, this.dataset.filters ? this.dataset.filters.split(',') : '').then(text => {
         this.data = text;
         if (this.data){
-          const html = Object.entries(this.countLetters(this.data.split(''))).sort(([a, countA], [b, countB]) => {
+          let lettersCounts = this.countLetters(this.data.split(''));
+          const alphabet = 'AZERTYUIOPMLKJHGFDSQWXCVBN'.split('');
+          for (let i in alphabet){
+            if (!this.data.includes(alphabet[i])){
+              lettersCounts[alphabet[i]] = 0;
+            }
+          }
+          const html = Object.entries(lettersCounts).sort(([a, countA], [b, countB]) => {
             return (countA < countB) ? 1 : (countA === countB ? 0 : -1);
           }).map(([char, count]) => {
             return `<tr>` +
             '<td>' + char + '</td>' +
             '<td>' + count + '</td>' +
+            '<td>' + Math.round(100 * (count / this.data.length), 2) + '%</td>' +
             `</tr>`;
-          }).join('');
+          }).join('') +
+          '<tr><td></td><td>' + this.data.length + '</td><td>100%</td></tr>';
           this.querySelector('.result').innerHTML = '<table>' + html + '</table>';
         }
       });
